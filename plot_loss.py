@@ -1,9 +1,12 @@
 import matplotlib.pyplot as plt
 
-with open('model/loss') as f:
-	losses = list(map(float, f.read().split('\n')))
-# print(losses)
-# exit()
+try:
+	with open('model/loss') as f:
+		losses = list(map(float, f.read().split('\n')))
+except:
+	print("Train first")
+	exit()
+
 fig, ax = plt.subplots(figsize = (12, 8))
 ax.plot(list(range(len(losses))), losses, 'r')
 ax.legend(loc = 2)

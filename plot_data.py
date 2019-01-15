@@ -1,15 +1,20 @@
 import matplotlib.pyplot as plt
 import csv
+import sys
 
-with open("data/cars.csv") as f:
-	data = list(csv.reader(f))
-	del data[0]
+from read_data import get_data
+from normalize import normalize
 
-x = [float(s[0]) for s in data]
-y = [float(s[1]) for s in data]
+x, y = get_data()
+
+try:
+	if len(sys.argv) > 1:
+		x, y = normalize(x, y)
+except:
+	print("Train first")
+	exit()
 
 fig, ax = plt.subplots(figsize = (12, 8))
-# ax.plot(x, pred, 'r', label = 'Prediction')
 ax.scatter(x, y, label = 'Traning Data')
 ax.legend(loc = 2)
 ax.set_xlabel('Milleage')
